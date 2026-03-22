@@ -31,7 +31,16 @@ def sitemap():
     return Response("\n".join(xml), mimetype="text/xml")
 
 
+# --- Robots Route --- #
+@app.route("/robots.txt")
+def robots():
+    return Response(
+        "User-agent: *\nDisallow:\nSitemap: https://www.szain.co/sitemap.xml",
+        mimetype="text/plain",
+    )
+
+
 if __name__ == "__main__":
-    app.config["FREEZER_BASE_URL"] = "https://szain.co"
+    app.config["FREEZER_BASE_URL"] = "https://www.szain.co"
     freezer.init_app(app)
     freezer.freeze()
